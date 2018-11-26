@@ -29,6 +29,8 @@
   "dependencies": {
     "@types/node": "^10.12.10",
     "axios": "^0.18.0",
-    "axois": "^1.0.0"
+    "axois": "^1.0.0",
+    "bootstrap-scss": "^4.1.3",
+    "fetch": "^1.1.0"
   }
 }
