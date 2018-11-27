@@ -47,7 +47,7 @@ fetch(API_URL, {
       !!document.getElementById(key) ? SetHtmlElement(key, user[key].toString()) : null
     })
 
-    // ... betyder "spread opatetor"
+    // ... betyder "spread operator"
     const items : Item[] = [...myJson.items] 
     items.forEach((item: Item) => {
       Object.keys(item).forEach((key) => {
@@ -61,18 +61,23 @@ fetch(API_URL, {
         document.getElementById('items').appendChild(wrapper)
       })
       const hr = document.createElement('hr')      
-      document.getElementById('items').appendChild(hr)
+      const MakeBotton = document.createElement('button')
+      MakeBotton.innerHTML = "Reserver denne"
+      MakeBotton.onclick = function() {
+        window.location.href = "./?testsite="+ item.uid
+    }
+    document.getElementById('items').appendChild(MakeBotton)
+    document.getElementById('items').appendChild(hr)
     })
 
 });
-
 const SetHtmlElement = (element: string, value: string) => {
       document.getElementById(element).innerText = value.toString()
   
 }
+const urlParams = new URLSearchParams(window.location.search);
+const myParam = urlParams.get('object');
+if (myParam != null)
+{
 
-
-
-
-
-
+}
