@@ -1,5 +1,5 @@
 //område til interface(wannabe class)
-interface Item
+export interface Item
 {
   uid: string;
   item: string;
@@ -11,7 +11,7 @@ interface Item
   [key: string]: string
 };
 
-interface User 
+export interface User 
 {
   category: string,
   name: string,
@@ -56,7 +56,7 @@ fetch(API_URL, {
           // sæt en anden value ind her som du får fra dit andet API
           // fjern const og lav en "let value" og sæt IF ind
           const value = document.createTextNode(item[key])
-
+          
         wrapper.appendChild(value)
         document.getElementById('items').appendChild(wrapper)
       })
@@ -64,11 +64,24 @@ fetch(API_URL, {
       const MakeBotton = document.createElement('button')
       MakeBotton.innerHTML = "Reserver denne"
       MakeBotton.onclick = function() {
-        window.location.href = "./testsite.htm?testsite="+ item.uid
+        window.location.href = "/items/"+ item.uid
     }
     document.getElementById('items').appendChild(MakeBotton)
     document.getElementById('items').appendChild(hr)
     })
+
+    // let ost = {
+    //   name: 'brie'  
+    // }
+    
+    // let osteTemplate = `
+    //   <div class="">
+      
+    //   </div>
+    //   <p>${ost.name}</p>
+    // `
+    
+    // document.getElementById('items').innerHTML = osteTemplate
 
 });
 const SetHtmlElement = (element: string, value: string) => {
@@ -81,3 +94,5 @@ if (myParam != null)
 {
 
 }
+
+// urlparametren -> fetch -> data -> template -> vises
