@@ -1,3 +1,7 @@
+const flatpickr = require("flatpickr")
+const moment = require('moment');
+
+
 //område til interface(wannabe class)
 export interface Item
 {
@@ -23,7 +27,10 @@ export interface User
 };
 
 const API_URL = 'http://api.evang.dk/dimselab/v1/items.php?'
-const API_TOKEN =  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjYXRlZ29yeSI6InRlc3QgYWNjb3VudCIsIm5hbWUiOiJTdHVkZW50IiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE1NDI2MzQ5NTMsImV4cCI6MTU1ODQxNDk1M30.YJAjKlKx5QWYtyb_sIEKRfNRIKtnlci3nn2Ee7o4Ges"
+const API_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjYXRlZ29yeSI6InRlc3QgYWNjb3VudCIsIm5hbWUiOiJTdHVkZW50IiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE1NDI2MzQ5NTMsImV4cCI6MTU1ODQxNDk1M30.YJAjKlKx5QWYtyb_sIEKRfNRIKtnlci3nn2Ee7o4Ges'
+const API_URL2 = 'https://3semesterprojekt.azurewebsites.net/api/barcodedatabase'
+const API_URL3 ='API til res'
+
 
 fetch(API_URL, {
   method: 'get',
@@ -61,28 +68,134 @@ fetch(API_URL, {
         document.getElementById('items').appendChild(wrapper)
       })
       const hr = document.createElement('hr')      
-      const MakeBotton = document.createElement('button')
-      MakeBotton.innerHTML = "Reserver denne"
-      MakeBotton.onclick = function() {
-        window.location.href = "/items/?"+ item.uid
+      const button = document.createElement('button')
+      button.type = 'button'
+      button.name = item.uid
+      //MakeBotton.value = item.uid
+      button.innerText = "Reserver denne"
+      button.onclick = function(event: any) {
+        const itemId = event.target.name
+
+        let availableItems: number
+        // 1) Hent hvor mange der er available
+        // fetch('API')
+        //   .then((response) => {
+        //     return response.json()
+        //   })
+        //   .then((resAsJSON) => {
+        //     availableItems = resAsJSON.amount
+        //   })
+        // 1.A) Find ud af hvilke datoer er optaget
+            // fetch('http://example.com/movies.json', {
+          //   method: 'GET',
+          //     // body: {
+                
+          //     // }
+          // })
+          //   .then(function(response) {
+          //    return response.json();
+          //   })
+          //   .then(function(myJson) {
+          //   console.log(JSON.stringify(myJson));
+          //    });
+          
+
+        // 2) Byg form til at reserveres
+        const currentForm = document.getElementById('reserverForm') // enten lig med et HTML element eller undefined
+        
+        const form = document.createElement('form')
+        form.setAttribute('id', 'reserverForm')
+        form.setAttribute('method', 'post')
+        form.setAttribute('action', '/')
+
+        const input = document.createElement('input')
+        input.setAttribute('type', 'text')
+        input.setAttribute('placeholder', 'Antal')
+        //hvis der skal bruges flere input, lav dem her
+
+        const submit = document.createElement("input")
+        submit.setAttribute('type',"submit")
+        submit.setAttribute('value',"Submit")
+
+        form.appendChild(input)
+        form.appendChild(submit)
+
+        //const availableItemsLabel = document.createElement('div')
+        //availableItemsLabel.innerHTML = `<bold> Ledige enheder: </bold> ${availableItems}`
+        // document.getElementById('reservations').appendChild(availableItemsLabel) 
+        
+        
+        if (currentForm) { // hvis den ikke er undefined (hvis den findes)
+          currentForm.replaceWith(form) // Så udskift den med den nye form
+        } else { // ellers
+          document.getElementById('reservations').appendChild(form) // så indsæt en ny form
+        }
+
+        // 3) POST til API for at reservere
+        submit.onclick = (event: any) => {
+          event.preventDefault
+          console.log(event.target)
+          // post til API HER (API_URL)
+          // fetch('http://example.com/movies.json', {
+          //   method: 'POST',
+          //     // body: {
+                
+          //     // }
+          // })
+          //   .then(function(response) {
+          //    return response.json();
+          //   })
+          //   .then(function(myJson) {
+          //   console.log(JSON.stringify(myJson));
+          //    });
+        }
+        const datePicker = document.createElement('input')
+        datePicker.type = 'text'
+        datePicker.setAttribute('data-input', 'datainput')
+
+        const testDates: any[] = [
+          moment('29-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY'),
+          moment('19-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY'),
+          moment('09-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY'),
+          moment('11-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY'),
+          moment('12-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY')
+        ]
+moment
+        flatpickr(datePicker, {
+          mode: "range",
+          locale: {
+            firstDayOfWeek: 1
+          },
+          disable: [
+            function(date: any) {
+              // return true to disable
+              // Vælg datoer her der skal være slået fra (dage der er optaget)
+              // Johan siger:
+              //  Jeg tror at du skal bruge følgende metodik
+              //  
+              return testDates.includes(moment(date).format('DD-MM-YYYY'))
+              // return (moment(date).format('DD-MM-YYYY') === moment().format('DD-MM-YYYY') || date.getDay() === 0);
+            }
+          ],    
+        })
+
+        document.getElementById('reservations').appendChild(datePicker)
+
+
+       
+       
+       
+        // lav et post call til resavationer
+
+        //trin 2. tilføje en kaldner som man kan vælge dato
+        // input for weeks(datetime) input amount
+        // hente rasten af info'en fra fetch og ebbes api
+        // lave en søge funktion efter "tags" fra ebbe's api
+        //
     }
-    document.getElementById('items').appendChild(MakeBotton)
+    document.getElementById('items').appendChild(button)
     document.getElementById('items').appendChild(hr)
     })
-
-    // let ost = {
-    //   name: 'brie'  
-    // }
-    
-    // let osteTemplate = `
-    //   <div class="">
-      
-    //   </div>
-    //   <p>${ost.name}</p>
-    // `
-    
-    // document.getElementById('items').innerHTML = osteTemplate
-
 });
 const SetHtmlElement = (element: string, value: string) => {
       document.getElementById(element).innerText = value.toString()
