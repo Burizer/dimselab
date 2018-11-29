@@ -64,7 +64,7 @@ fetch(API_URL, {
       const MakeBotton = document.createElement('button')
       MakeBotton.innerHTML = "Reserver denne"
       MakeBotton.onclick = function() {
-        window.location.href = "/items/"+ item.uid
+        window.location.href = "/items/?"+ item.uid
     }
     document.getElementById('items').appendChild(MakeBotton)
     document.getElementById('items').appendChild(hr)
