@@ -153,21 +153,31 @@ fetch(API_URL, {
         datePicker.type = 'text'
         datePicker.setAttribute('data-input', 'datainput')
 
+        // Udskift med data fra API Kald
+        // Husk at formatere datoer fra API :)
+        // 2018-12-19-12:001
+        // gør moment('weeks_weeks', 'DD-MM-YYYY').format('DD-MM-YYYY')
         const testDates: any[] = [
           moment('29-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY'),
           moment('19-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY'),
+          moment('19-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY'),
           moment('09-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY'),
           moment('11-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY'),
-          moment('12-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY')
+          moment('12-11-2018', 'DD-MM-YYYY').format('DD-MM- YYYY')
         ]
-moment
+
+        const chosenDates: any = {
+          start: null,
+          end: null
+        }
+
         flatpickr(datePicker, {
           mode: "range",
           locale: {
             firstDayOfWeek: 1
           },
           disable: [
-            function(date: any) {
+            function(date: Date) {
               // return true to disable
               // Vælg datoer her der skal være slået fra (dage der er optaget)
               // Johan siger:
@@ -176,16 +186,16 @@ moment
               return testDates.includes(moment(date).format('DD-MM-YYYY'))
               // return (moment(date).format('DD-MM-YYYY') === moment().format('DD-MM-YYYY') || date.getDay() === 0);
             }
-          ],    
+          ],
+          onValueUpdate: function(date: Date[]) {
+            chosenDates.start = date[0],
+            chosenDates.end = date[1]
+
+            console.log(chosenDates)
+          }    
         })
 
         document.getElementById('reservations').appendChild(datePicker)
-
-
-       
-       
-       
-        // lav et post call til resavationer
 
         //trin 2. tilføje en kaldner som man kan vælge dato
         // input for weeks(datetime) input amount
