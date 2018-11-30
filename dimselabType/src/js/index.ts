@@ -163,7 +163,7 @@ fetch(API_URL, {
           moment('19-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY'),
           moment('09-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY'),
           moment('11-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY'),
-          moment('12-11-2018', 'DD-MM-YYYY').format('DD-MM- YYYY')
+          moment('12-11-2018', 'DD-MM-YYYY').format('DD-MM-YYYY')
         ]
 
         const chosenDates: any = {
@@ -197,11 +197,9 @@ fetch(API_URL, {
 
         document.getElementById('reservations').appendChild(datePicker)
 
-        //trin 2. tilføje en kaldner som man kan vælge dato
-        // input for weeks(datetime) input amount
+        //lave en hurtigt lån, knap ved siden af resavere hvor man låner et objekt i 30 dage, skal afleveres sidste hverdag inde for de sidste 30 dage
         // hente rasten af info'en fra fetch og ebbes api
-        // lave en søge funktion efter "tags" fra ebbe's api
-        //
+        // lave en søge funktion efter "tags" fra ebbe's api  
     }
     document.getElementById('items').appendChild(button)
     document.getElementById('items').appendChild(hr)
@@ -218,4 +216,18 @@ if (myParam != null)
 
 }
 
+let barcode: HTMLInputElement = <HTMLInputElement> document.getElementById("barcodeScanner");
+barcode.addEventListener("keydown", function(event){
+  
+  if(event.key === 'Enter') {
+    alert(barcode.value);     
+};
+//barcode.focus(); // sæt markør i hidden inputfield
+//barcode.select();
+document.getElementById("barcodeScanner").focus();
+
+
+
+
 // urlparametren -> fetch -> data -> template -> vises
+// ved siden af, resvarer knappen skal du have muligheden bare at låne den i 30 dage;
