@@ -7,6 +7,7 @@ export interface Item
 {
   uid: string;
   item: string;
+  // amount skal ændres til number
   amount: string;
   description: string;
   keywords: string;
@@ -206,12 +207,31 @@ fetch(API_URL, {
     }
     //#region Lånknap
     LoanButton.onclick = function(event: any){
-      let barcode: HTMLInputElement = <HTMLInputElement> document.getElementById("barcodeScanner");
-      // barcode.addEventListener("keydown", function(event)){
-      //   if(event.key === 'Enter') {
-      //     alert(barcode.value);    
+      // let barcode: HTMLInputElement = <HTMLInputElement> document.getElementById("barcodeScanner");
+      // alert("Scan hvad du vil låne")
+      // if (item.amount != 0)
+      // {
+      //   alert('Varen er udlånt')
+      //   // put vores metode ind her
+      //   fetch('http://example.com/movies.json',{
+      //     method: 'PUT'
+      //   })
+      //   .then(function(response) {
+      //     return response.json();
+      //   })
+      //   .then(function(myJson) {
+      //     console.log(JSON.stringify(myJson));
+      //   });
       // }
-      document.getElementById("barcodeScanner").focus();
+      // else 
+      // {
+      //   alert('Der er ikke nogle ledige')
+      // }
+      // // barcode.addEventListener("keydown", function(event)){
+      // //   if(event.key === 'Enter') {
+      // //     alert(barcode.value);    
+      // // }
+      // document.getElementById("barcodeScanner").focus();
     };
     //#endregion låneknap
     document.getElementById('items').appendChild(button)
