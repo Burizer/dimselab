@@ -69,10 +69,12 @@ fetch(API_URL, {
       })
       const hr = document.createElement('hr')      
       const button = document.createElement('button')
+      const LoanButton = document.createElement('button')
       button.type = 'button'
       button.name = item.uid
-      //MakeBotton.value = item.uid
       button.innerText = "Reserver denne"
+      LoanButton.innerHTML = "Lån denne"
+      //#region Resvereknap
       button.onclick = function(event: any) {
         const itemId = event.target.name
 
@@ -200,8 +202,20 @@ fetch(API_URL, {
         //lave en hurtigt lån, knap ved siden af resavere hvor man låner et objekt i 30 dage, skal afleveres sidste hverdag inde for de sidste 30 dage
         // hente rasten af info'en fra fetch og ebbes api
         // lave en søge funktion efter "tags" fra ebbe's api  
+        //#endregion Resvereknap
     }
+    //#region Lånknap
+    LoanButton.onclick = function(event: any){
+      let barcode: HTMLInputElement = <HTMLInputElement> document.getElementById("barcodeScanner");
+      // barcode.addEventListener("keydown", function(event)){
+      //   if(event.key === 'Enter') {
+      //     alert(barcode.value);    
+      // }
+      document.getElementById("barcodeScanner").focus();
+    };
+    //#endregion låneknap
     document.getElementById('items').appendChild(button)
+    document.getElementById('items').appendChild(LoanButton)
     document.getElementById('items').appendChild(hr)
     })
 });
@@ -209,25 +223,5 @@ const SetHtmlElement = (element: string, value: string) => {
       document.getElementById(element).innerText = value.toString()
   
 }
-const urlParams = new URLSearchParams(window.location.search);
-const myParam = urlParams.get('object');
-if (myParam != null)
-{
-
-}
-
-let barcode: HTMLInputElement = <HTMLInputElement> document.getElementById("barcodeScanner");
-barcode.addEventListener("keydown", function(event){
-  
-  if(event.key === 'Enter') {
-    alert(barcode.value);     
-};
-//barcode.focus(); // sæt markør i hidden inputfield
-//barcode.select();
-document.getElementById("barcodeScanner").focus();
-
-
-
-
-// urlparametren -> fetch -> data -> template -> vises
 // ved siden af, resvarer knappen skal du have muligheden bare at låne den i 30 dage;
+// knappen
