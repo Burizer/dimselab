@@ -1,9 +1,3 @@
-/*
-  A webpack configuration file designed
-  for webdevelopment with typescript and scss
-  by Ebbe Vang, evang.dk
-*/
-
 const path = require('path');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
  

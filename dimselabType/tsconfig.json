@@ -9,6 +9,12 @@
     "lib": [
       "dom",
       "es7"
-    ]
+    ],
+    "baseUrl": "./src/js",
+    "paths": {
+      "@common/*": ["app/common/*"],
+      "@interface/*": ["app/interface/*"],
+      "@component/*": ["app/component/*"]
+    }
   }
 }

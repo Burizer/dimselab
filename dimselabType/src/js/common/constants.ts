@@ -1,0 +1,6 @@
+export const API_DIMSELAB = 'http://api.evang.dk/dimselab/v1/items.php?'
+export const API_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjYXRlZ29yeSI6InRlc3QgYWNjb3VudCIsIm5hbWUiOiJTdHVkZW50IiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE1NDI2MzQ5NTMsImV4cCI6MTU1ODQxNDk1M30.YJAjKlKx5QWYtyb_sIEKRfNRIKtnlci3nn2Ee7o4Ges'
+export const API_ITEMS = 'https://3semesterprojekt.azurewebsites.net/api/items'
+export const API_RES ='https://3semesterprojekt.azurewebsites.net/api/reservations'
+export const API_USERS ='https://3semesterprojekt.azurewebsites.net/api/users'
+export const API_WEEKS ='https://3semesterprojekt.azurewebsites.net/api/weeks'
