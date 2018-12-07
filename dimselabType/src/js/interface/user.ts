@@ -1,8 +1,8 @@
 export interface User
 {
-  id:Number,
+  id:number,
   name:string,
   category:string,
-  admin:number,
+  role:string,
   [key:number]:number | string
 }
